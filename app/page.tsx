@@ -16,7 +16,6 @@ export default function App() {
     });
   }
   return <div>
-    <h1>Hello world</h1>
-    <button onClick={onSignin}>Sign in</button>
+    <button onClick={onSignin}>Sign In</button>
   </div>;
 }
