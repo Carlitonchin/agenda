@@ -4,6 +4,8 @@ import { Amplify } from "aws-amplify";
 import { client } from "@/lib/client"
 import { fetchAuthSession } from 'aws-amplify/auth';
 import outputs from "@/amplify_outputs.json";
+import { Hub } from "aws-amplify/utils";
+import { useEffect } from "react";
 
 
 Amplify.configure(outputs);
@@ -27,6 +29,12 @@ console.log("Creating todo...")
     }
     
   }
+
+  useEffect(()=>{
+    Hub.listen('auth', (data) => {
+      console.log(data)
+    });
+  }, []);
 
   return <div>
     <button onClick={createTodo}>Add new todo</button>

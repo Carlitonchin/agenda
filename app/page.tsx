@@ -2,7 +2,7 @@
 
 import "./../app/app.css";
 import { Amplify } from "aws-amplify";
-import { fetchAuthSession, signInWithRedirect } from 'aws-amplify/auth';
+import { fetchAuthSession, signInWithRedirect,getCurrentUser } from 'aws-amplify/auth';
 import outputs from "@/amplify_outputs.json";
 import "@aws-amplify/ui-react/styles.css";
 import { client } from "@/lib/client";
@@ -17,21 +17,16 @@ export default function App() {
   }
 
   const createTodo = async () => {
-    console.log("hola")
-      const session = await fetchAuthSession({forceRefresh: true});
-  console.log({session})
-  console.log("id token", session.tokens?.idToken)
-  console.log("access token", session.tokens?.accessToken)
   
   console.log("Creating todo...")	
       try{
         var res = await client.models.Todo.create({
           content: "contenido",
           isDone: false
-        }, {
-          authMode: "userPool",
-          authToken: session.credentials?.sessionToken
-        })
+        },
+      {
+        authMode: "apiKey"
+      })
         console.log({res})
       }catch(e){
         console.log(e)
