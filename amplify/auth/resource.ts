@@ -14,7 +14,7 @@ export const auth = defineAuth({
         attributeMapping: {
           email: 'email',
         },
-        scopes: ['email'],
+        scopes: ['openid', 'email', 'profile'],
       },
       callbackUrls: [
         'http://localhost:3000/profile',
